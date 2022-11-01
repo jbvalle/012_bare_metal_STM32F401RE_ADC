@@ -1,8 +1,3 @@
-/**
- *@file startup_STM32F401RE.c
- *@brief Startup Code for Vector Table Initialization and Reset Handling
- *@include startup_STM32F401RE.c
- **/
 #include <stdint.h>
 
 /** global variables **/
@@ -15,6 +10,7 @@ extern uint32_t _ebss;
 
 /** Prototypes **/
 extern int main(void);
+
 void Reset_handler          (void);
 void NMI_handler            (void)__attribute__((weak, alias("Default_handler")));
 void HardFault_handler      (void)__attribute__((weak, alias("Default_handler")));

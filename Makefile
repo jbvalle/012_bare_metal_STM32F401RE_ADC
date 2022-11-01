@@ -18,7 +18,7 @@ LD := $(wildcard $(SUP_DIR)/*.ld)
 # FLAGS
 MARCH = cortex-m4
 CFLAGS = -g -Wall -mcpu=$(MARCH) -mthumb -mfloat-abi=soft -I$(INC_DIR)
-LFLAGS = -nostdlib -T $(LD) -Wl,-Map=$(DEB_DIR)/main.map
+LFLAGS = -specs=nano.specs -T $(LD) -Wl,-Map=$(DEB_DIR)/main.map
 
 #PATHS
 OPENOCD_INTERFACE = /usr/share/openocd/scripts/interface/stlink-v2.cfg
@@ -55,12 +55,9 @@ debug: FORCE
 edit: FORCE
 	vim -S Session.vim
 
-doxy: FORCE
-	cd ./docs && doxygen Doxyfile
-
 clean: FORCE
 	rm -rf $(SRC_DIR)/$(OBJ_DIR) $(DEB_DIR)
 
 FORCE:
 
-.PHONY = mkobj mkdeb clean FORCE flash debug edit doxy
+.PHONY = mkobj mkdeb clean FORCE flash debug edit

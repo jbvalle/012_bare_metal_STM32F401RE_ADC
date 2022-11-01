@@ -1,7 +1,3 @@
-/**
- *@file peripherals.h
- *@brief Peripheral initialization using structs
- **/
 #ifndef PERIPHERLAS_H
 #define PERIPHERLAS_H
 #include <stdint.h>
