@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['peripherals_2eh_9',['peripherals.h',['../peripherals_8h.html',1,'']]]
+  ['syscfg_5ft_6',['SYSCFG_t',['../structSYSCFG__t.html',1,'']]]
 ];
