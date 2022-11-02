@@ -666,9 +666,7 @@ LOAD /opt/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/12.2.0/thumb/v7e-m/nofp
                 0x200001dc                __malloc_free_list
                 0x200001e0                        . = ALIGN (0x4)
                 0x200001e0                        _ebss = .
-                0x200001e0                        . = ALIGN (0x4)
                 0x200001e0                        __bss_end__ = _ebss
-                0x200001e0                        . = ALIGN (0x4)
                 0x200001e0                        end = _ebss
 OUTPUT(debug/main.elf elf32-littlearm)
 LOAD linker stubs

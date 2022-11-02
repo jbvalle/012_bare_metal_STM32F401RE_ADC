@@ -114,9 +114,37 @@ typedef struct EXTI_t{
     __IO uint32_t EXTI_PR;
 }EXTI_t;
 
+typedef struct ADC_t{
+    __IO uint32_t ADC_SR;
+    __IO uint32_t ADC_CR1;
+    __IO uint32_t ADC_CR2;
+    __IO uint32_t ADC_SMPR1;
+
+    __IO uint32_t ADC_SMPR2;
+    __IO uint32_t ADC_JOFR1;
+    __IO uint32_t ADC_JOFR2;
+    __IO uint32_t ADC_JOFR3;
+
+    __IO uint32_t ADC_JOFR4;
+    __IO uint32_t ADC_HTR;
+    __IO uint32_t ADC_LTR;
+    __IO uint32_t ADC_SQR1;
+    
+    __IO uint32_t ADC_SQR2;
+    __IO uint32_t ADC_SQR3;
+    __IO uint32_t ADC_JSQR;
+    __IO uint32_t ADC_JDR1;
+
+    __IO uint32_t ADC_JDR2;
+    __IO uint32_t ADC_JDR3;
+    __IO uint32_t ADC_JDR4;
+    __IO uint32_t ADC_DR;
+}ADC_t;
+
 extern RCC_t * const RCC;
 extern GPIOx_t * const GPIOA;
 extern USART_t * const USART2;
 extern NVIC_t * const NVIC;
+extern ADC_t * const ADC;
 
 #endif
