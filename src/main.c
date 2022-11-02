@@ -62,9 +62,9 @@ int main(void){
         // Start the conversion
         ADC->ADC_CR2 |= (1 << CONV_START);
         // Check if Conversion has finished
-        while(!(ADC->ADC_SR & EOC_FLAG));
+        while(!(ADC->ADC_SR & (1 << EOC_FLAG)));
         // Read ADC value | EOC is reset automatically
         uint16_t result = ADC->ADC_DR;
-        printf("Valule : %d\r\n", result);
+        //printf("Value %u:\r\n", (uint16_t)result);
     }
 }
