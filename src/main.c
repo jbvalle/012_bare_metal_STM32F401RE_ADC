@@ -65,6 +65,6 @@ int main(void){
         while(!(ADC->ADC_SR & (1 << EOC_FLAG)));
         // Read ADC value | EOC is reset automatically
         uint16_t result = ADC->ADC_DR;
-        //printf("Value %u:\r\n", (uint16_t)result);
+        printf("Value %u:\r\n", (uint16_t)result);
     }
 }
