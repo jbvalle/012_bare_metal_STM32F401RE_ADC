@@ -1,15 +1,18 @@
 #include <stdint.h>
 #include <stdio.h>
 #include "peripherals.h"
+
+// GPIO Macros
 #define pin1    1
 #define pin5    5
-
 #define MODER   2
 #define OUTPUT  1
 #define ANALOG  3
-#define ADC1    8
 #define RESET_MODER 3
 #define GPIOA_EN 1
+// ADC Macros
+#define CH1 1
+#define ADC1    8
 #define LENGTH_SEQ 20
 #define CONV_START 30
 #define EOC_FLAG 1
@@ -49,23 +52,16 @@ void ADC_handler(void){
     printf("Value %u:\r\n", (uint16_t)result);
 }
 
-int main(void){
-
-    initialise_monitor_handles();
+void _configure_ADC1_interrupt(uint32_t analog_PIN, uint32_t channel){
 
     // SET global disable 
     _global_disable_NVIC();
-    // Enable and Configure GPIOA P5 
-    RCC->RCC_AHB1ENR |= GPIOA_EN;
-    
-    GPIOA->GPIOx_MODER &= ~(RESET_MODER     << (pin5 * MODER));
-    GPIOA->GPIOx_MODER |=  (OUTPUT          << (pin5 * MODER));
 
     // Enable and configure PA1 as Analog Pin 
     RCC->RCC_AHB1ENR |= GPIOA_EN;
-
-    GPIOA->GPIOx_MODER &= ~(RESET_MODER     << (pin1 * MODER));
-    GPIOA->GPIOx_MODER |=  (ANALOG          << (pin1 * MODER));
+    // Set GPIOA1 as Analog
+    GPIOA->GPIOx_MODER &= ~(RESET_MODER     << (analog_PIN * MODER));
+    GPIOA->GPIOx_MODER |=  (ANALOG          << (analog_PIN * MODER));
 
     //* Configure ADC1 *//
     RCC->RCC_APB2ENR |= (1 << ADC1);
@@ -75,7 +71,7 @@ int main(void){
     ADC->ADC_SQR1 &= ~(0xF << LENGTH_SEQ);
     // Set first conversion in SQR to be from CH1
     ADC->ADC_SQR3 &= ~0x1F;
-    ADC->ADC_SQR3 |= 1;
+    ADC->ADC_SQR3 |= channel;
     // Enable interrupt for EOC FLAG
     ADC->ADC_CR1 |= (1 << EOC_INTERRUPT);
     // Enable NVIC IRQ18
@@ -88,6 +84,12 @@ int main(void){
     ADC->ADC_CR2 |= (1 << CONT_MODE);
     // Start the conversion
     ADC->ADC_CR2 |= (1 << CONV_START);
+}
+int main(void){
+
+    initialise_monitor_handles();
+
+    _configure_ADC1_interrupt(pin1, CH1);
 
     for(;;);
 }
