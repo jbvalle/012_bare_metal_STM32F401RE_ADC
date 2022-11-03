@@ -9,16 +9,16 @@
 #define OUTPUT  1
 #define ANALOG  3
 #define RESET_MODER 3
-#define GPIOA_EN 1
+#define GPIOA_EN    1
 // ADC Macros
-#define CH1 1
+#define CH1     1
 #define ADC1    8
-#define LENGTH_SEQ 20
-#define CONV_START 30
-#define EOC_FLAG 1
-#define EOC_INTERRUPT 5
-#define ADC_IRQ 18
-#define CONT_MODE 1
+#define LENGTH_SEQ      20
+#define CONV_START      30
+#define EOC_FLAG         1
+#define EOC_INTERRUPT    5
+#define ADC_IRQ         18
+#define CONT_MODE        1
 
 ADC_t   * const ADC    = (ADC_t    *)  0x40012000;
 RCC_t   * const RCC     = (RCC_t    *)  0x40023800;
@@ -43,7 +43,6 @@ void _global_disable_NVIC(void){
     uint32_t priMASK = 1;
     __asm volatile("MSR primask, %0"::"r"(priMASK):"memory");
 }
-
 
 void ADC_handler(void){
 
